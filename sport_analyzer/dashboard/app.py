@@ -1,18 +1,25 @@
 import os
 import sys
 
-# ВАЖНО: добавляем папку sport_analyzer в путь импорта
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+# ✅ Добавляем /mount/src/sport-analyzer/sport_analyzer в sys.path
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
 
-import json
-import sqlite3
-from datetime import datetime
-from typing import Dict
+    # (не обязательно, но полезно для диагностики)
+    # print("BASE_DIR:", BASE_DIR)
+    # print("sys.path[0]:", sys.path[0])
 
-import pandas as pd
-import streamlit as st
+    import json
+    import sqlite3
+    from datetime import datetime
+    from typing import Dict
 
-from config.settings import Config
+    import pandas as pd
+    import streamlit as st
+
+    from config.settings import Config
+    
 from collectors.sports_collector import SportsCollector
 from collectors.weather_collector import WeatherCollector
 from collectors.news_collector import NewsCollector
