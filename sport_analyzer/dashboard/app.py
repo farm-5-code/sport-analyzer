@@ -1,7 +1,9 @@
 import os
 import sys
 
-# чтобы работали импорты вида: from config.settings import Config
+# ВАЖНО: добавляем папку sport_analyzer в путь импорта
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 import json
 import sqlite3
 from datetime import datetime
