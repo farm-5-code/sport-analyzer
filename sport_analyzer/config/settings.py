@@ -1,7 +1,12 @@
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
+# dotenv — необязательно (Streamlit может не ставить python-dotenv сразу)
+try:
+    from dotenv import load_dotenv
+        load_dotenv()
+except Exception:
+            pass
+            
 
 
 class Config:
