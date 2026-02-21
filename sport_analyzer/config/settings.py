@@ -1,12 +1,11 @@
 import os
 
-# dotenv — необязательно (Streamlit может не ставить python-dotenv сразу)
+# dotenv — опционально (на хостингах может не быть установлен)
 try:
     from dotenv import load_dotenv
-        load_dotenv()
+    load_dotenv()
 except Exception:
-            pass
-            
+    pass
 
 
 class Config:
@@ -17,7 +16,7 @@ class Config:
     GNEWS_KEY         = os.getenv("GNEWS_KEY",         "")
 
     # Database
-    DB_PATH = "sport_analyzer.db"
+    DB_PATH = os.getenv("DB_PATH", "sport_analyzer.db")
 
     # Analysis weights
     WEIGHTS = {

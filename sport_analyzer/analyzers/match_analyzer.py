@@ -12,6 +12,7 @@ from analyzers.fatigue import (
     fatigue_to_concede_factor,
     get_match_importance,
 )
+from analyzers.injury_impact import injury_factors
 from models.ml_predictor import MatchPredictor, build_features
 
 logger = logging.getLogger(__name__)

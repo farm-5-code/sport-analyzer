@@ -1,32 +1,37 @@
+"""Streamlit dashboard.
+
+Локальный запуск:
+  streamlit run sport_analyzer/dashboard/app.py
+
+Для деплоя (Streamlit Community Cloud / similar):
+  - этот файл должен быть выбран как entrypoint
+  - requirements.txt должен лежать в корне репозитория
+"""
+
 import os
 import sys
+import json
+import sqlite3
+import logging
+from datetime import datetime
+from typing import Dict
 
-# ✅ Добавляем /mount/src/sport-analyzer/sport_analyzer в sys.path
+import pandas as pd
+import streamlit as st
+
+# Добавляем пакет sport_analyzer в sys.path
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
-    # (не обязательно, но полезно для диагностики)
-    # print("BASE_DIR:", BASE_DIR)
-    # print("sys.path[0]:", sys.path[0])
-
-    import json
-    import sqlite3
-    from datetime import datetime
-    from typing import Dict
-
-    import pandas as pd
-    import streamlit as st
-
-    from config.settings import Config
-    
+from config.settings import Config
 from collectors.sports_collector import SportsCollector
 from collectors.weather_collector import WeatherCollector
 from collectors.news_collector import NewsCollector
 from collectors.xg_collector import XGCollector
 from analyzers.match_analyzer import MatchAnalyzer
 from database.migrations import run_migrations
-from utils.team_names import normalize_team_name
+from utils.team_normalizer import normalize_team_name
 
 
 st.set_page_config(
